@@ -11,6 +11,12 @@
   <header class="arcade-header">
     <img src="assets/logo.png" alt="Pixley Arcade" class="arcade-logo">
     <h1>Pixley Arcade</h1>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="leaderboard/index.html">Leaderboard</a> |
+      <a href="auth/login.html" id="nav-login" style="display:inline;">Login</a>
+      <span id="nav-user" style="display:none;">Hi, <span id="user-name"></span>! <button id="logout-btn">Logout</button></span>
+    </nav>
   </header>
   <main class="arcade-main">
     <h2>Featured Games</h2>
@@ -26,9 +32,11 @@
   <footer class="arcade-footer">
     🕹️ New games always in development. More features are always in the works.<br>
     <strong>Want to flex your high score?</strong> 
-    <span class="footer-cta">Sign up to compete on the leaderboards!</span>
+    <span class="footer-cta" id="footer-signup">Sign up to compete on the leaderboards!</span>
     <div class="footer-brand">Powered by Pixley Arcade</div>
   </footer>
-  <!-- Firebase SDK will go here next -->
+
+  <!-- Firebase SDK + Auth + Main JS -->
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
