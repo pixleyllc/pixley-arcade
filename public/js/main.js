@@ -1,8 +1,7 @@
-// /public/js/main.js
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
+// Your actual Firebase config:
 const firebaseConfig = {
   apiKey: "AIzaSyDR4bwMoeVZ39EstyiG-HNmHNdLuztn_cU",
   authDomain: "pixley-arcade.firebaseapp.com",
@@ -23,14 +22,14 @@ const logoutBtn = document.getElementById("logout-btn");
 const footerSignup = document.getElementById("footer-signup");
 
 function showUser(user) {
-  navLogin && (navLogin.style.display = "none");
-  navUser && (navUser.style.display = "inline");
-  userName && (userName.textContent = user.displayName || user.email);
+  if (navLogin) navLogin.style.display = "none";
+  if (navUser) navUser.style.display = "inline";
+  if (userName) userName.textContent = user.displayName || user.email;
 }
 
 function showGuest() {
-  navLogin && (navLogin.style.display = "inline");
-  navUser && (navUser.style.display = "none");
+  if (navLogin) navLogin.style.display = "inline";
+  if (navUser) navUser.style.display = "none";
 }
 
 onAuthStateChanged(auth, (user) => {
@@ -38,4 +37,17 @@ onAuthStateChanged(auth, (user) => {
   else showGuest();
 });
 
-navLogin && navLogin.addEventListener("
+navLogin && navLogin.addEventListener("click", (e) => {
+  e.preventDefault();
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider).catch(err => alert("Login failed: " + err.message));
+});
+
+logoutBtn && logoutBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  signOut(auth).catch(err => alert("Logout failed: " + err.message));
+});
+
+footerSignup && footerSignup.addEventListener("click", () => {
+  navLogin && navLogin.click();
+});
