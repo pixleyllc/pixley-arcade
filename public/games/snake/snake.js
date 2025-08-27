@@ -2,7 +2,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebas
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-// Firebase config (real, from your project)
 const firebaseConfig = {
   apiKey: "AIzaSyDR4bwMoeVZ39EstyiG-HNmHNdLuztn_cU",
   authDomain: "pixley-arcade.firebaseapp.com",
@@ -65,7 +64,6 @@ function move() {
   if (head.x === food.x && head.y === food.y) {
     score += 100;
     scoreEl.textContent = "Score: " + score;
-    // spawn new food, not on snake
     do {
       food = { x: Math.floor(Math.random() * 20), y: Math.floor(Math.random() * 20) };
     } while (snake.some(s => s.x === food.x && s.y === food.y));
