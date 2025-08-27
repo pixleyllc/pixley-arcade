@@ -1,0 +1,98 @@
+body {
+  background: #18181a;
+  color: #ffe066;
+  font-family: 'Bebas Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.arcade-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #232326;
+  padding: 18px 0 10px 0;
+  border-bottom: 2px solid #28282b;
+}
+
+.arcade-logo {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 6px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.3rem;
+  letter-spacing: 5px;
+  font-family: 'Bebas Neue', Arial, sans-serif;
+}
+
+.arcade-main {
+  padding: 28px 16px 16px 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.games-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.game-card {
+  background: #242427;
+  color: #ffe066;
+  padding: 20px 30px;
+  border-radius: 18px;
+  font-size: 1.35rem;
+  font-weight: bold;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.16);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, transform 0.13s;
+  text-align: center;
+  min-width: 100px;
+}
+
+.game-card:hover {
+  background: #ffe066;
+  color: #18181a;
+  transform: scale(1.05);
+}
+
+.arcade-footer {
+  width: 100%;
+  background: #18181a;
+  color: #ffe066;
+  font-family: 'Bebas Neue', Arial, sans-serif;
+  padding: 24px 0 12px 0;
+  text-align: center;
+  font-size: 1rem;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.5);
+  border-top: 2px solid #28282b;
+}
+
+.footer-cta {
+  color: #ffe066;
+  background: #242427;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
+}
+.footer-cta:hover {
+  background: #ffe066;
+  color: #18181a;
+}
+.footer-brand {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  color: #aaa;
+  letter-spacing: 2px;
+}
