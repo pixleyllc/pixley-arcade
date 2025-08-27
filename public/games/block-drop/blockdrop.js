@@ -2,8 +2,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebas
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-// Only initialize Firebase once per page! If the page already initializes, skip this.
-// If this is the only Firebase init on this page, include your config here:
 const firebaseConfig = {
   apiKey: "AIzaSyDR4bwMoeVZ39EstyiG-HNmHNdLuztn_cU",
   authDomain: "pixley-arcade.firebaseapp.com",
