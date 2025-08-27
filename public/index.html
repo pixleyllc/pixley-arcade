@@ -14,7 +14,7 @@
     <nav>
       <a href="index.html">Home</a> |
       <a href="leaderboard/index.html">Leaderboard</a> |
-      <a href="auth/login.html" id="nav-login" style="display:inline;">Login</a>
+      <span id="nav-login" style="display:inline;"><button>Login</button></span>
       <span id="nav-user" style="display:none;">Hi, <span id="user-name"></span>! <button id="logout-btn">Logout</button></span>
     </nav>
   </header>
@@ -35,8 +35,7 @@
     <span class="footer-cta" id="footer-signup">Sign up to compete on the leaderboards!</span>
     <div class="footer-brand">Powered by Pixley Arcade</div>
   </footer>
-
-  <!-- Firebase SDK + Auth + Main JS -->
+  <!-- Firebase Auth + Main JS -->
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
