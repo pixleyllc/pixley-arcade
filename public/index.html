@@ -50,7 +50,7 @@
     }
     .main-content {
       width: 100%;
-      max-width: 420px;
+      max-width: 930px;
       margin: 0 auto;
       text-align: left;
     }
@@ -64,50 +64,77 @@
       font-family: 'Bebas Neue', Arial, sans-serif;
       text-align: left;
     }
-    .game-list {
+    .games-row {
       display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin-bottom: 36px;
       flex-wrap: wrap;
-      gap: 22px;
-      margin-bottom: 38px;
-      justify-content: flex-start;
     }
-    .game-card {
-      flex: 1 0 42%;
-      min-width: 160px;
-      max-width: 190px;
+    .game-column {
       background: #232326;
       border-radius: 22px;
-      box-shadow: 0 2px 16px #00000022;
-      padding: 24px 10px 18px 10px;
+      box-shadow: 0 2px 16px #0000001d;
+      padding: 38px 28px 32px 28px;
+      width: 340px;
+      min-height: 350px;
       color: #ffe066;
-      font-size: 1.14em;
-      font-weight: 600;
-      margin-bottom: 2px;
-      cursor: pointer;
-      border: 1.5px solid #34343a;
-      text-align: center;
-      transition: transform 0.08s, box-shadow 0.13s;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
+      justify-content: flex-start;
+    }
+    .game-title {
+      font-size: 1.22em;
+      font-weight: bold;
+      letter-spacing: 0.07em;
+      margin-bottom: 10px;
+      margin-top: 8px;
+      color: #ffe066;
+    }
+    .game-desc {
+      color: #ffe066cc;
+      font-size: 0.99em;
+      margin-bottom: 24px;
+      margin-top: 6px;
+      text-align: center;
+    }
+    .game-card {
+      background: #232326;
+      border-radius: 18px;
+      box-shadow: 0 2px 16px #ffe06611;
+      padding: 18px 8px 12px 8px;
+      text-align: center;
+      color: #ffe066;
+      cursor: pointer;
+      font-size: 1.19em;
+      font-weight: 500;
+      transition: transform 0.08s, box-shadow 0.13s;
+      border: 1.5px solid #34343a;
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .game-card:hover {
       transform: scale(1.04);
-      box-shadow: 0 4px 28px #ffe06624;
+      box-shadow: 0 4px 32px #ffe06620;
       border-color: #ffe066;
     }
     .game-icon {
-      font-size: 2.3em;
-      margin-bottom: 8px;
+      font-size: 2.4em;
+      margin-bottom: 10px;
       display: block;
     }
-    .coming-soon {
-      opacity: 0.48;
-      font-size: 0.94em;
-      margin-top: 2px;
-      font-weight: 400;
+    .footer-note {
+      text-align: center;
+      font-size: 1.03em;
+      opacity: 0.8;
+      color: #ffe066;
+      padding: 28px 0 16px 0;
+      letter-spacing: 0.04em;
+      margin-top: 32px;
+      margin-bottom: 6px;
     }
     .leaderboard-btn {
       display: block;
@@ -129,26 +156,16 @@
       box-shadow: 0 4px 24px #ffe06654;
       color: #18181a;
     }
-    .footer-note {
-      text-align: center;
-      font-size: 1.03em;
-      opacity: 0.8;
-      color: #ffe066;
-      padding: 28px 0 16px 0;
-      letter-spacing: 0.04em;
-      margin-top: 32px;
-      margin-bottom: 6px;
-    }
-    @media (max-width: 700px) {
-      .logo { font-size: 2em; }
-      nav { font-size: 1.15em; max-width: 95vw;}
+    @media (max-width: 900px) {
       .main-content { max-width: 98vw;}
-      .game-list { gap: 13px;}
-      .game-card { min-width: 45vw; }
+      .games-row { flex-direction: column; gap: 22px;}
+      .game-column { width: 99vw; min-width: unset; max-width: 410px;}
     }
     @media (max-width: 500px) {
-      .main-content { padding: 0 3vw; }
-      .game-list { gap: 10px; }
+      .logo { font-size: 2em; }
+      nav { font-size: 1.15em; max-width: 97vw;}
+      .main-content { max-width: 99vw;}
+      .game-column { padding: 18px 2vw 15px 2vw;}
     }
   </style>
 </head>
@@ -162,22 +179,22 @@
   </nav>
   <div class="main-content">
     <h2>Featured Games</h2>
-    <div class="game-list">
-      <a class="game-card" href="games/block-drop/index.html">
-        <span class="game-icon">🟨</span>
-        Block Drop
-      </a>
-      <a class="game-card" href="games/snake/index.html">
-        <span class="game-icon">🐍</span>
-        Snake
-      </a>
-      <div class="game-card" style="cursor: default;">
-        <span class="game-icon">🔒</span>
-        ??? <div class="coming-soon">Coming Soon</div>
+    <div class="games-row">
+      <div class="game-column">
+        <div class="game-title">Block Drop</div>
+        <div class="game-desc">Stack the falling blocks, clear rows, get the highest score. Play now!</div>
+        <a class="game-card" href="games/block-drop/index.html" style="margin-top:12px;">
+          <span class="game-icon">🟨</span>
+          <span>Play Block Drop</span>
+        </a>
       </div>
-      <div class="game-card" style="cursor: default;">
-        <span class="game-icon">🔒</span>
-        ??? <div class="coming-soon">Coming Soon</div>
+      <div class="game-column">
+        <div class="game-title">Snake</div>
+        <div class="game-desc">Eat food, grow your snake, don’t run into yourself! Tap to play.</div>
+        <a class="game-card" href="games/snake/index.html" style="margin-top:12px;">
+          <span class="game-icon">🐍</span>
+          <span>Play Snake</span>
+        </a>
       </div>
     </div>
     <button class="leaderboard-btn" onclick="window.location.href='leaderboard/index.html'">View Leaderboard</button>
