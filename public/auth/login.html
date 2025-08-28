@@ -2,16 +2,99 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pixley Arcade – Login</title>
+  <title>Sign In – Pixley Arcade</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-  <h1>Login to Pixley Arcade</h1>
-  <button id="googleSignInBtn">Sign in with Google</button>
+  <style>
+    .login-card {
+      background: #232326;
+      border-radius: 22px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+      padding: 32px 26px 26px 26px;
+      max-width: 330px;
+      margin: 44px auto 0 auto;
+      color: #ffe066;
+      text-align: center;
+      border: 1.5px solid #34343a;
+    }
+    .login-card h2 {
+      margin-bottom: 26px;
+      font-size: 1.42em;
+      color: #ffe066;
+      letter-spacing: 0.03em;
+    }
+    .login-card label {
+      display: block;
+      margin-bottom: 7px;
+      text-align: left;
+      font-size: 1em;
+      font-weight: 600;
+      color: #ffe066;
+      letter-spacing: 0.01em;
+    }
+    .login-card input[type="email"], .login-card input[type="password"] {
+      width: 96%;
+      padding: 11px 12px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: none;
+      background: #18181a;
+      color: #ffe066;
+      font-size: 1.07em;
+      outline: none;
+      border: 1.2px solid #333;
+    }
+    .login-btn, .google-btn {
+      width: 100%;
+      padding: 12px 0;
+      margin-top: 10px;
+      background: #ffe066;
+      color: #18181a;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: box-shadow 0.12s;
+    }
+    .login-btn:hover, .google-btn:hover {
+      box-shadow: 0 2px 10px #ffe06655;
+    }
+    .google-btn {
+      background: #fff;
+      color: #18181a;
+      border: 1.3px solid #ffe066;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .login-card .alt-links {
+      margin-top: 12px;
+      font-size: 0.98em;
+      color: #ffe066c9;
+      letter-spacing: 0.01em;
+    }
+    .login-card .alt-links a {
+      color: #ffe066;
+      text-decoration: underline;
+      margin: 0 5px;
+      opacity: 0.88;
+      transition: opacity 0.15s;
+    }
+    .login-card .alt-links a:hover {
+      opacity: 1;
+      text-shadow: 0 2px 10px #ffe06638;
+    }
+  </style>
+  <!-- Optional: Firebase Auth SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
     const firebaseConfig = {
       apiKey: "AIzaSyDR4bwMoeVZ39EstyiG-HNmHNdLuztn_cU",
       authDomain: "pixley-arcade.firebaseapp.com",
@@ -23,12 +106,61 @@
     };
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    document.getElementById("googleSignInBtn").onclick = () => {
-      const provider = new GoogleAuthProvider();
-      signInWithPopup(auth, provider)
-        .then(() => window.location.href = "/index.html")
-        .catch(err => alert("Login failed: " + err.message));
+
+    window.loginFormSubmit = async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const pw = document.getElementById('password').value;
+      try {
+        await signInWithEmailAndPassword(auth, email, pw);
+        alert("Signed in!");
+        window.location.href = "../index.html";
+      } catch (err) {
+        alert("Login failed: " + err.message);
+      }
+    };
+    window.signInWithGoogle = async function() {
+      try {
+        await signInWithPopup(auth, new GoogleAuthProvider());
+        alert("Signed in with Google!");
+        window.location.href = "../index.html";
+      } catch (err) {
+        alert("Google sign-in failed: " + err.message);
+      }
     };
   </script>
+</head>
+<body>
+  <header>
+    <div class="logo">PIXLEY</div>
+    <nav>
+      <a href="../index.html" title="Home">🏠</a>
+      <a href="../leaderboard/index.html" title="Leaderboard">🏆</a>
+      <a href="login.html" class="active" title="Sign In">🔑</a>
+      <a href="mailto:support@pixleyarcade.com" title="Support">📩</a>
+    </nav>
+  </header>
+  <main>
+    <form class="login-card" onsubmit="loginFormSubmit(event)">
+      <h2>Sign in to Pixley Arcade</h2>
+      <button type="button" class="google-btn" onclick="signInWithGoogle()">
+        <span style="font-size:1.2em;">🔵</span> Sign in with Google
+      </button>
+      <label for="email">Email</label>
+      <input type="email" id="email" autocomplete="username" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" autocomplete="current-password" required>
+      <button type="submit" class="login-btn">Sign In</button>
+      <div class="alt-links">
+        <a href="#">Forgot password?</a>
+        &middot;
+        <a href="#">Create account</a>
+      </div>
+    </form>
+    <div class="footer-note" style="margin-top:30px;">
+      We never share your info.<br>
+      <a href="mailto:support@pixleyarcade.com">Contact support</a>
+    </div>
+  </main>
 </body>
 </html>
