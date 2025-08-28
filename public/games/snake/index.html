@@ -6,19 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="../../css/style.css">
   <style>
+    html, body {
+      background: #18181a;
+      color: #ffe066;
+      margin: 0;
+      padding: 0;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+    }
     .logo, nav { margin-left: auto; margin-right: auto; }
     .main-content { max-width: 430px; margin: 28px auto 0 auto; text-align: center; }
-    h2 { font-size: 2em; letter-spacing: 0.08em; margin-bottom: 16px; }
+    h2 { font-size: 2em; letter-spacing: 0.08em; margin-bottom: 16px; margin-top: 20px;}
     #snake-board {
       margin: 28px auto 16px auto;
       display: grid;
-      grid-template-rows: repeat(20, 5vw);
-      grid-template-columns: repeat(20, 5vw);
+      grid-template-rows: repeat(20, 1fr);
+      grid-template-columns: repeat(20, 1fr);
       gap: 2px;
       background: #232326;
       border-radius: 13px;
       box-shadow: 0 2px 18px rgba(0,0,0,0.22);
-      width: 100vw; max-width: 330px; height: 100vw; max-height: 330px;
+      width: 320px;
+      height: 320px;
+      max-width: 94vw;
+      max-height: 94vw;
+      aspect-ratio: 1 / 1;
       position: relative;
     }
     .snake-cell {
@@ -38,8 +49,8 @@
       display: flex;
       justify-content: center;
       gap: 12px;
-      margin-top: 5px;
-      margin-bottom: 10px;
+      margin-top: 8px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
     .controls button {
@@ -47,12 +58,17 @@
       border: none;
       color: #18181a;
       border-radius: 12px;
-      padding: 13px 17px;
-      font-size: 1.33em;
+      padding: 0;
+      width: 52px;
+      height: 52px;
+      font-size: 1.55em;
       font-weight: bold;
       box-shadow: 0 2px 10px #ffe06633;
       cursor: pointer;
       transition: box-shadow 0.14s, background 0.12s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .controls button:active {
       background: #ffef80;
@@ -74,9 +90,19 @@
       margin-right: auto;
     }
     .back-btn:hover { box-shadow: 0 2px 10px #ffe06633; }
-    .footer-note { margin-top: 32px;}
+    .footer-note { margin-top: 32px; }
     @media (max-width: 600px) {
-      #snake-board { width: 95vw; max-width: 98vw; height: 95vw; max-height: 98vw; }
+      #snake-board {
+        width: 97vw;
+        max-width: 99vw;
+        height: auto;
+        max-height: unset;
+        aspect-ratio: 1 / 1;
+      }
+      .controls button {
+        width: 46px; height: 46px; font-size: 1.33em;
+      }
+      .main-content { padding: 0 3vw; }
     }
   </style>
 </head>
@@ -89,20 +115,20 @@
     <a href="mailto:support@pixleyarcade.com" title="Support">📩</a>
   </nav>
   <div class="main-content">
-    <h2>Snake</h2>
-    <div id="snake-score">Score: 0</div>
+    <h2>SNAKE</h2>
+    <div id="snake-score">SCORE: 0</div>
     <div id="snake-board"></div>
     <div class="controls">
-      <button onclick="moveLeft()">◀️</button>
+      <button onclick="moveLeft()" title="Left">◀️</button>
       <div style="display:flex; flex-direction:column; gap:3px;">
-        <button onclick="moveUp()">▲</button>
-        <button onclick="moveDown()">▼</button>
+        <button onclick="moveUp()" title="Up">▲</button>
+        <button onclick="moveDown()" title="Down">▼</button>
       </div>
-      <button onclick="moveRight()">▶️</button>
+      <button onclick="moveRight()" title="Right">▶️</button>
     </div>
     <button class="back-btn" onclick="window.location.href='../../index.html'">← Back to Arcade</button>
     <div class="footer-note">
-      How long can you last? Don’t run into yourself!
+      <span style="color:#ffe066;">HOW LONG CAN YOU LAST? DON'T RUN INTO YOURSELF!</span>
     </div>
   </div>
   <script>
@@ -139,7 +165,7 @@
           boardElem.appendChild(div);
         }
       }
-      scoreElem.textContent = 'Score: ' + score;
+      scoreElem.textContent = 'SCORE: ' + score;
     }
     function step() {
       if (gameOver) return;
