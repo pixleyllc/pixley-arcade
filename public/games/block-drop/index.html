@@ -5,14 +5,65 @@
   <title>Block Drop – Pixley Arcade</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="../../css/style.css">
-  <link rel="stylesheet" href="blockdrop.css">
+  <style>
+    #blockdrop-board {
+      margin: 32px auto;
+      display: grid;
+      grid-template-rows: repeat(20, 20px);
+      grid-template-columns: repeat(10, 20px);
+      gap: 1px;
+      background: #232326;
+      border-radius: 10px;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.22);
+      width: 202px; height: 402px;
+    }
+    .block {
+      background: #ffe066;
+      border-radius: 4px;
+      width: 20px; height: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      transition: background 0.13s;
+    }
+    #score { font-size: 1.4em; margin: 10px 0; }
+    #start-btn { font-size: 1em; padding: 10px 30px; border-radius: 12px; border: none; background: #ffe066; color: #18181a; font-weight: bold; cursor: pointer; }
+    .back-btn {
+      margin-top: 24px;
+      background: #ffe066;
+      color: #18181a;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      padding: 8px 24px;
+      cursor: pointer;
+      transition: box-shadow 0.12s;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .back-btn:hover { box-shadow: 0 2px 10px #ffe06633; }
+  </style>
+  <script type="module" src="blockdrop.js"></script>
 </head>
 <body>
-  <h1>Block Drop</h1>
-  <a href="../../index.html">← Back to Arcade</a>
-  <div id="score">Score: 0</div>
-  <button id="start-btn">Start Game</button>
-  <div id="blockdrop-board"></div>
-  <script type="module" src="blockdrop.js"></script>
+  <header>
+    <div class="logo">PIXLEY</div>
+    <nav>
+      <a href="../../index.html" title="Home">🏠</a>
+      <a href="../../leaderboard/index.html" title="Leaderboard">🏆</a>
+      <a href="../../auth/login.html" title="Sign In">🔑</a>
+      <a href="mailto:support@pixleyarcade.com" title="Support">📩</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Block Drop</h2>
+    <div id="score">Score: 0</div>
+    <button id="start-btn">Start Game</button>
+    <div id="blockdrop-board"></div>
+    <button class="back-btn" onclick="window.location.href='../../index.html'">← Back to Arcade</button>
+    <div class="footer-note" style="margin-top:34px;">
+      Score high to get on the leaderboard!
+    </div>
+  </main>
 </body>
 </html>
