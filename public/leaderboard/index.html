@@ -2,25 +2,111 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Leaderboards – Pixley Arcade</title>
+  <title>Leaderboard – Pixley Arcade</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .leaderboard-table {
+      width: 100%;
+      max-width: 360px;
+      margin: 24px auto 0 auto;
+      background: #232326;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #0000001d;
+      color: #ffe066;
+      border-collapse: collapse;
+      font-size: 1.08em;
+    }
+    .leaderboard-table th, .leaderboard-table td {
+      padding: 12px 8px;
+      border-bottom: 1px solid #333;
+      text-align: center;
+    }
+    .leaderboard-table th {
+      font-weight: bold;
+      background: #232326;
+      color: #ffe066;
+    }
+    .leaderboard-table tr:last-child td {
+      border-bottom: none;
+    }
+    .rank {
+      font-weight: 700;
+      font-size: 1.14em;
+    }
+    .back-btn {
+      margin-top: 20px;
+      background: #ffe066;
+      color: #18181a;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      padding: 8px 24px;
+      cursor: pointer;
+      transition: box-shadow 0.12s;
+    }
+    .back-btn:hover {
+      box-shadow: 0 2px 10px #ffe06633;
+    }
+  </style>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+    import { getFirestore, collection, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDR4bwMoeVZ39EstyiG-HNmHNdLuztn_cU",
+      authDomain: "pixley-arcade.firebaseapp.com",
+      projectId: "pixley-arcade",
+      storageBucket: "pixley-arcade.firebasestorage.app",
+      messagingSenderId: "115314116623",
+      appId: "1:115314116623:web:556c994edb0a292f793b7a",
+      measurementId: "G-Y7ZFC541XE"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function loadLeaderboard() {
+      let q = query(collection(db, "leaderboard"), orderBy("score", "desc"), limit(10));
+      const snapshot = await getDocs(q);
+      const lb = [];
+      snapshot.forEach(doc => lb.push(doc.data()));
+
+      const list = document.getElementById("leaderboard-list");
+      list.innerHTML = `<table class="leaderboard-table">
+        <tr><th>Rank</th><th>User</th><th>Score</th><th>Game</th></tr>
+        ${lb.length === 0 ? `<tr><td colspan="4">No scores yet!</td></tr>` : ""}
+        ${lb.map((d, i) =>
+          `<tr>
+            <td class="rank">${i + 1}</td>
+            <td>${d.user || "(anon)"}</td>
+            <td>${d.score}</td>
+            <td>${d.game || ""}</td>
+          </tr>`
+        ).join("")}
+      </table>`;
+    }
+    window.addEventListener('DOMContentLoaded', loadLeaderboard);
+  </script>
 </head>
 <body>
-  <header class="arcade-header">
-    <img src="../assets/logo.png" alt="Pixley Arcade" class="arcade-logo">
-    <h1>Leaderboards</h1>
+  <header>
+    <div class="logo">PIXLEY</div>
     <nav>
-      <a href="../index.html">Home</a>
+      <a href="../index.html" title="Home">🏠</a>
+      <a href="index.html" class="active" title="Leaderboard">🏆</a>
+      <a href="../auth/login.html" title="Sign In">🔑</a>
+      <a href="mailto:support@pixleyarcade.com" title="Support">📩</a>
     </nav>
   </header>
-  <main class="arcade-main">
+  <main>
     <h2>Leaderboard</h2>
     <div id="leaderboard-list"></div>
+    <button class="back-btn" onclick="window.location.href='../index.html'">← Back to Arcade</button>
+    <div class="footer-note" style="margin-top:28px;">
+      Top 10 scores across all games.<br>
+      Sign in to submit your score!
+    </div>
   </main>
-  <footer class="arcade-footer">
-    <div class="footer-brand">Powered by Pixley Arcade</div>
-  </footer>
-  <script type="module" src="leaderboard.js"></script>
 </body>
 </html>
