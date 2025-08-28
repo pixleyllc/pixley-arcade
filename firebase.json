@@ -6,11 +6,11 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [],
-    "headers": [],
-    "redirects": [],
-    "cleanUrls": true,
-    "trailingSlash": false,
-    "errorPage": "404.html"
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/404.html"
+      }
+    ]
   }
 }
