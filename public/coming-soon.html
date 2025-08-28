@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Coming Soon – Pixley Arcade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .coming-soon-main {
+      background: #232326;
+      border-radius: 20px;
+      box-shadow: 0 2px 18px #0000001e;
+      padding: 48px 18px 32px 18px;
+      max-width: 340px;
+      margin: 56px auto 0 auto;
+      color: #ffe066;
+      text-align: center;
+      border: 1.5px solid #34343a;
+    }
+    .soon-icon {
+      font-size: 3.5em;
+      margin-bottom: 10px;
+      opacity: 0.92;
+      text-shadow: 0 2px 22px #ffe06633;
+    }
+    .soon-head {
+      font-size: 1.48em;
+      font-weight: bold;
+      letter-spacing: 0.03em;
+      margin-bottom: 8px;
+      color: #ffe066;
+    }
+    .soon-desc {
+      color: #ffe066cc;
+      font-size: 1.1em;
+      margin-bottom: 14px;
+    }
+    .back-btn {
+      margin-top: 14px;
+      background: #ffe066;
+      color: #18181a;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      padding: 8px 24px;
+      cursor: pointer;
+      transition: box-shadow 0.12s;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .back-btn:hover { box-shadow: 0 2px 10px #ffe06633; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">PIXLEY</div>
+    <nav>
+      <a href="index.html" title="Home">🏠</a>
+      <a href="leaderboard/index.html" title="Leaderboard">🏆</a>
+      <a href="auth/login.html" title="Sign In">🔑</a>
+      <a href="mailto:support@pixleyarcade.com" title="Support">📩</a>
+    </nav>
+  </header>
+  <main>
+    <div class="coming-soon-main">
+      <div class="soon-icon">🚧</div>
+      <div class="soon-head">New Game Coming Soon</div>
+      <div class="soon-desc">
+        We’re building something awesome!  
+        <br>
+        Check back later for new games and features.
+      </div>
+      <button class="back-btn" onclick="window.location.href='index.html'">← Back to Arcade</button>
+    </div>
+    <div class="footer-note" style="margin-top:36px;">
+      Have an idea for a game?<br>
+      <a href="mailto:support@pixleyarcade.com" style="color:#ffe066;text-decoration:underline;">Email us</a>
+    </div>
+  </main>
+</body>
+</html>
