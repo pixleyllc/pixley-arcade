@@ -5,6 +5,12 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "rewrites": [],
+    "headers": [],
+    "redirects": [],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "errorPage": "404.html"
   }
 }
