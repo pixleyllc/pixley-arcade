@@ -6,19 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="../../css/style.css">
   <style>
+    html, body {
+      background: #18181a;
+      color: #ffe066;
+      margin: 0;
+      padding: 0;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+    }
     .logo, nav { margin-left: auto; margin-right: auto; }
     .main-content { max-width: 430px; margin: 28px auto 0 auto; text-align: center; }
-    h2 { font-size: 2em; letter-spacing: 0.08em; margin-bottom: 16px; }
+    h2 { font-size: 2em; letter-spacing: 0.08em; margin-bottom: 16px; margin-top: 20px;}
     #blockdrop-board {
       margin: 28px auto 16px auto;
       display: grid;
-      grid-template-rows: repeat(20, 5vw);
-      grid-template-columns: repeat(10, 5vw);
+      grid-template-rows: repeat(20, 1fr);
+      grid-template-columns: repeat(10, 1fr);
       gap: 2px;
       background: #232326;
       border-radius: 13px;
       box-shadow: 0 2px 18px rgba(0,0,0,0.22);
-      width: 50vw; max-width: 220px; height: 100vw; max-height: 440px;
+      width: 320px;
+      height: 640px;
+      max-width: 94vw;
+      max-height: 80vw;
+      aspect-ratio: 10 / 20;
+      position: relative;
     }
     .block {
       background: #ffe066;
@@ -31,21 +43,27 @@
     .controls {
       display: flex;
       justify-content: center;
-      gap: 14px;
-      margin-top: 5px;
-      margin-bottom: 12px;
+      gap: 12px;
+      margin-top: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
     }
     .controls button {
       background: #ffe066;
       border: none;
       color: #18181a;
       border-radius: 12px;
-      padding: 13px 17px;
-      font-size: 1.33em;
+      padding: 0;
+      width: 52px;
+      height: 52px;
+      font-size: 1.55em;
       font-weight: bold;
       box-shadow: 0 2px 10px #ffe06633;
       cursor: pointer;
       transition: box-shadow 0.14s, background 0.12s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .controls button:active {
       background: #ffef80;
@@ -67,9 +85,19 @@
       margin-right: auto;
     }
     .back-btn:hover { box-shadow: 0 2px 10px #ffe06633; }
-    .footer-note { margin-top: 32px;}
+    .footer-note { margin-top: 32px; }
     @media (max-width: 600px) {
-      #blockdrop-board { width: 95vw; max-width: 97vw; height: 190vw; max-height: 97vw; }
+      #blockdrop-board {
+        width: 97vw;
+        max-width: 99vw;
+        height: auto;
+        max-height: unset;
+        aspect-ratio: 10 / 20;
+      }
+      .controls button {
+        width: 46px; height: 46px; font-size: 1.33em;
+      }
+      .main-content { padding: 0 3vw; }
     }
   </style>
 </head>
@@ -82,23 +110,22 @@
     <a href="mailto:support@pixleyarcade.com" title="Support">📩</a>
   </nav>
   <div class="main-content">
-    <h2>Block Drop</h2>
-    <div id="score">Score: 0</div>
+    <h2>BLOCK DROP</h2>
+    <div id="score">SCORE: 0</div>
     <div id="blockdrop-board"></div>
     <div class="controls">
-      <button onclick="moveLeft()">◀️</button>
-      <button onclick="rotate()">🔄</button>
-      <button onclick="moveRight()">▶️</button>
-      <button onclick="dropDown()">⬇️</button>
+      <button onclick="moveLeft()" title="Left">◀️</button>
+      <button onclick="rotate()" title="Rotate">🔄</button>
+      <button onclick="moveRight()" title="Right">▶️</button>
+      <button onclick="dropDown()" title="Drop">⬇️</button>
     </div>
     <button class="back-btn" onclick="window.location.href='../../index.html'">← Back to Arcade</button>
     <div class="footer-note">
-      Score high to get on the leaderboard!
+      <span style="color:#ffe066;">SCORE HIGH TO GET ON THE LEADERBOARD!</span>
     </div>
   </div>
   <script>
     // --- Block Drop / Tetris Mini JS ---
-    // Simple playable version (for full, let me know!)
     const ROWS = 20, COLS = 10;
     const boardElem = document.getElementById('blockdrop-board');
     let board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
@@ -126,7 +153,7 @@
       current = randomShape();
       cx = Math.floor((COLS - current[0].length)/2);
       cy = 0;
-      if (collides(cx, cy, current)) { gameOver=true; clearInterval(tick); alert('Game Over! Score: ' + score); }
+      if (collides(cx, cy, current)) { gameOver=true; clearInterval(tick); setTimeout(()=>{alert('Game Over! Score: ' + score); startGame();}, 100); }
     }
     function collides(nx, ny, shape=current) {
       for (let y=0; y<shape.length; y++) {
@@ -159,7 +186,7 @@
       }
       if (cleared) {
         score += cleared*100;
-        scoreElem.textContent = 'Score: ' + score;
+        scoreElem.textContent = 'SCORE: ' + score;
       }
     }
     function render() {
@@ -203,19 +230,266 @@
     });
     function startGame() {
       board = Array.from({length:ROWS},()=>Array(COLS).fill(0));
-      score=0; scoreElem.textContent='Score: 0';
+      score=0; scoreElem.textContent='SCORE: 0';
       gameOver=false;
       spawn();
       render();
       clearInterval(tick);
-      tick = setInterval(()=>{step();}, 500);
+      tick = setInterval(()=>{step();}, 480);
     }
-    startGame();
     // Touch controls
     window.moveLeft = moveLeft;
     window.moveRight = moveRight;
     window.rotate = rotate;
     window.dropDown = dropDown;
+    startGame();
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Block Drop – Pixley Arcade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    html, body {
+      background: #18181a;
+      color: #ffe066;
+      margin: 0;
+      padding: 0;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+    }
+    .logo, nav { margin-left: auto; margin-right: auto; }
+    .main-content { max-width: 430px; margin: 28px auto 0 auto; text-align: center; }
+    h2 { font-size: 2em; letter-spacing: 0.08em; margin-bottom: 16px; margin-top: 20px;}
+    #blockdrop-board {
+      margin: 28px auto 16px auto;
+      display: grid;
+      grid-template-rows: repeat(20, 1fr);
+      grid-template-columns: repeat(10, 1fr);
+      gap: 2px;
+      background: #232326;
+      border-radius: 13px;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.22);
+      width: 320px;
+      height: 640px;
+      max-width: 94vw;
+      max-height: 80vw;
+      aspect-ratio: 10 / 20;
+      position: relative;
+    }
+    .block {
+      background: #ffe066;
+      border-radius: 4px;
+      width: 100%; height: 100%;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      transition: background 0.13s;
+    }
+    #score { font-size: 1.17em; margin: 10px 0; }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .controls button {
+      background: #ffe066;
+      border: none;
+      color: #18181a;
+      border-radius: 12px;
+      padding: 0;
+      width: 52px;
+      height: 52px;
+      font-size: 1.55em;
+      font-weight: bold;
+      box-shadow: 0 2px 10px #ffe06633;
+      cursor: pointer;
+      transition: box-shadow 0.14s, background 0.12s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .controls button:active {
+      background: #ffef80;
+      box-shadow: 0 2px 16px #ffe06655;
+    }
+    .back-btn {
+      margin-top: 24px;
+      background: #ffe066;
+      color: #18181a;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      padding: 8px 24px;
+      cursor: pointer;
+      transition: box-shadow 0.12s;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .back-btn:hover { box-shadow: 0 2px 10px #ffe06633; }
+    .footer-note { margin-top: 32px; }
+    @media (max-width: 600px) {
+      #blockdrop-board {
+        width: 97vw;
+        max-width: 99vw;
+        height: auto;
+        max-height: unset;
+        aspect-ratio: 10 / 20;
+      }
+      .controls button {
+        width: 46px; height: 46px; font-size: 1.33em;
+      }
+      .main-content { padding: 0 3vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">PIXLEY</div>
+  <nav>
+    <a href="../../index.html" title="Home">🏠</a>
+    <a href="../../leaderboard/index.html" title="Leaderboard">🏆</a>
+    <a href="../../auth/login.html" title="Sign In">🔑</a>
+    <a href="mailto:support@pixleyarcade.com" title="Support">📩</a>
+  </nav>
+  <div class="main-content">
+    <h2>BLOCK DROP</h2>
+    <div id="score">SCORE: 0</div>
+    <div id="blockdrop-board"></div>
+    <div class="controls">
+      <button onclick="moveLeft()" title="Left">◀️</button>
+      <button onclick="rotate()" title="Rotate">🔄</button>
+      <button onclick="moveRight()" title="Right">▶️</button>
+      <button onclick="dropDown()" title="Drop">⬇️</button>
+    </div>
+    <button class="back-btn" onclick="window.location.href='../../index.html'">← Back to Arcade</button>
+    <div class="footer-note">
+      <span style="color:#ffe066;">SCORE HIGH TO GET ON THE LEADERBOARD!</span>
+    </div>
+  </div>
+  <script>
+    // --- Block Drop / Tetris Mini JS ---
+    const ROWS = 20, COLS = 10;
+    const boardElem = document.getElementById('blockdrop-board');
+    let board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
+    let score = 0;
+    let scoreElem = document.getElementById('score');
+
+    // Tetrimino shapes
+    const SHAPES = [
+      [[1,1,1,1]], // I
+      [[1,1],[1,1]], // O
+      [[0,1,0],[1,1,1]], // T
+      [[1,1,0],[0,1,1]], // S
+      [[0,1,1],[1,1,0]], // Z
+      [[1,0,0],[1,1,1]], // J
+      [[0,0,1],[1,1,1]], // L
+    ];
+
+    let current, cx, cy, tick, gameOver=false;
+
+    function randomShape() {
+      const shape = SHAPES[Math.floor(Math.random()*SHAPES.length)];
+      return shape.map(row => [...row]);
+    }
+    function spawn() {
+      current = randomShape();
+      cx = Math.floor((COLS - current[0].length)/2);
+      cy = 0;
+      if (collides(cx, cy, current)) { gameOver=true; clearInterval(tick); setTimeout(()=>{alert('Game Over! Score: ' + score); startGame();}, 100); }
+    }
+    function collides(nx, ny, shape=current) {
+      for (let y=0; y<shape.length; y++) {
+        for (let x=0; x<shape[y].length; x++) {
+          if (shape[y][x]) {
+            let bx = nx+x, by = ny+y;
+            if (bx<0 || bx>=COLS || by>=ROWS) return true;
+            if (by>=0 && board[by][bx]) return true;
+          }
+        }
+      }
+      return false;
+    }
+    function merge() {
+      for (let y=0; y<current.length; y++)
+        for (let x=0; x<current[y].length; x++)
+          if (current[y][x]) board[cy+y][cx+x] = 1;
+      clearLines();
+      spawn();
+    }
+    function clearLines() {
+      let cleared=0;
+      for (let y=ROWS-1; y>=0; y--) {
+        if (board[y].every(c=>c)) {
+          board.splice(y,1);
+          board.unshift(Array(COLS).fill(0));
+          cleared++;
+          y++;
+        }
+      }
+      if (cleared) {
+        score += cleared*100;
+        scoreElem.textContent = 'SCORE: ' + score;
+      }
+    }
+    function render() {
+      boardElem.innerHTML = '';
+      for (let y=0; y<ROWS; y++) {
+        for (let x=0; x<COLS; x++) {
+          let filled = board[y][x];
+          let active = false;
+          if (!gameOver) {
+            for (let dy=0; dy<current.length; dy++)
+              for (let dx=0; dx<current[dy].length; dx++)
+                if (current[dy][dx] && y===cy+dy && x===cx+dx) active=true;
+          }
+          const div = document.createElement('div');
+          div.className = filled||active ? 'block' : '';
+          boardElem.appendChild(div);
+        }
+      }
+    }
+    function step() {
+      if (gameOver) return;
+      if (!collides(cx, cy+1)) cy++;
+      else { merge(); }
+      render();
+    }
+    function moveLeft() { if (!collides(cx-1, cy)) { cx--; render(); } }
+    function moveRight() { if (!collides(cx+1, cy)) { cx++; render(); } }
+    function dropDown() { while (!collides(cx, cy+1)) cy++; merge(); render(); }
+    function rotate() {
+      const N = current.length, M = current[0].length;
+      let rot = Array.from({length:M},()=>Array(N).fill(0));
+      for(let y=0;y<N;y++)for(let x=0;x<M;x++)rot[x][N-1-y]=current[y][x];
+      if (!collides(cx, cy, rot)) { current = rot; render(); }
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key==='ArrowLeft') moveLeft();
+      if (e.key==='ArrowRight') moveRight();
+      if (e.key==='ArrowDown') step();
+      if (e.key==='ArrowUp' || e.key==='x') rotate();
+      if (e.key===' ') dropDown();
+    });
+    function startGame() {
+      board = Array.from({length:ROWS},()=>Array(COLS).fill(0));
+      score=0; scoreElem.textContent='SCORE: 0';
+      gameOver=false;
+      spawn();
+      render();
+      clearInterval(tick);
+      tick = setInterval(()=>{step();}, 480);
+    }
+    // Touch controls
+    window.moveLeft = moveLeft;
+    window.moveRight = moveRight;
+    window.rotate = rotate;
+    window.dropDown = dropDown;
+    startGame();
   </script>
 </body>
 </html>
