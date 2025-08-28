@@ -1,120 +1,134 @@
 body {
+  margin: 0;
+  font-family: 'Bebas Neue', Arial, sans-serif;
   background: #18181a;
   color: #ffe066;
-  font-family: 'Bebas Neue', Arial, sans-serif;
-  margin: 0;
-  padding: 0;
   min-height: 100vh;
-  box-sizing: border-box;
-}
-
-.arcade-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #232326;
-  padding: 18px 0 10px 0;
-  border-bottom: 2px solid #28282b;
+  justify-content: flex-start;
 }
-
-.arcade-logo {
-  width: 64px;
-  height: 64px;
-  margin-bottom: 6px;
-}
-
-h1 {
-  margin: 0;
-  font-size: 2.3rem;
-  letter-spacing: 5px;
-  font-family: 'Bebas Neue', Arial, sans-serif;
-}
-
-nav {
-  margin-top: 10px;
-  font-size: 1.15rem;
-}
-
-nav a, nav span, nav button {
-  color: #ffe066;
-  text-decoration: none;
-  background: none;
-  border: none;
-  font-family: inherit;
-  font-size: 1em;
-  cursor: pointer;
-  margin-right: 8px;
-  margin-left: 2px;
-  transition: color 0.15s;
-}
-
-nav a:hover, nav button:hover {
-  color: #fff7b2;
-}
-
-.arcade-main {
-  padding: 28px 16px 16px 16px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.games-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 22px;
-  justify-content: center;
-  margin-top: 18px;
-}
-
-.game-card {
-  background: #242427;
-  color: #ffe066;
-  padding: 20px 30px;
-  border-radius: 18px;
-  font-size: 1.35rem;
-  font-weight: bold;
-  box-shadow: 0 2px 14px rgba(0,0,0,0.16);
-  text-decoration: none;
-  transition: background 0.15s, color 0.15s, transform 0.13s;
-  text-align: center;
-  min-width: 100px;
-}
-
-.game-card:hover {
-  background: #ffe066;
-  color: #18181a;
-  transform: scale(1.05);
-}
-
-.arcade-footer {
+header {
   width: 100%;
-  background: #18181a;
-  color: #ffe066;
-  font-family: 'Bebas Neue', Arial, sans-serif;
-  padding: 24px 0 12px 0;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 16px 0 0 0;
   text-align: center;
-  font-size: 1rem;
-  box-shadow: 0 -2px 16px rgba(0,0,0,0.5);
-  border-top: 2px solid #28282b;
 }
-
-.footer-cta {
+.logo {
+  letter-spacing: 0.35em;
+  font-size: 2.35em;
+  font-family: 'Bebas Neue', Arial, sans-serif;
+  font-weight: 900;
   color: #ffe066;
-  background: #242427;
-  padding: 2px 8px;
-  border-radius: 12px;
-  margin-left: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s, color 0.2s;
+  margin-bottom: 5px;
+  user-select: none;
 }
-.footer-cta:hover {
+nav {
+  display: flex;
+  justify-content: space-between;
+  background: #232326;
+  border-radius: 24px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.17);
+  padding: 10px 22px;
+  margin: 14px auto 0 auto;
+  max-width: 340px;
+  font-size: 1.6em;
+  gap: 22px;
+  color: #ffe066;
+}
+nav a {
+  color: #ffe066;
+  text-decoration: none;
+  padding: 0 2px;
+  opacity: 0.74;
+  transition: opacity 0.12s;
+}
+nav a.active, nav a:hover {
+  opacity: 1;
+  text-shadow: 0 2px 16px #ffe06655;
+}
+main {
+  width: 100%;
+  max-width: 420px;
+  margin: 28px auto 0 auto;
+  flex: 1;
+}
+h2 {
+  font-size: 1.5em;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+  color: #ffe066;
+  font-family: inherit;
+}
+.game-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 0 auto;
+  max-width: 320px;
+  margin-bottom: 30px;
+}
+.game-card {
+  background: #232326;
+  border-radius: 22px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  padding: 20px 8px 14px 8px;
+  text-align: center;
+  color: #ffe066;
+  cursor: pointer;
+  font-size: 1.18em;
+  font-weight: 500;
+  transition: transform 0.08s, box-shadow 0.13s;
+  border: 1.5px solid #34343a;
+}
+.game-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 32px #ffe06620;
+  border-color: #ffe066;
+}
+.game-icon {
+  font-size: 2.6em;
+  margin-bottom: 8px;
+  display: block;
+}
+.coming-soon {
+  opacity: 0.47;
+  font-size: 0.91em;
+  margin-top: 5px;
+}
+.leaderboard-btn {
+  display: block;
   background: #ffe066;
   color: #18181a;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.12em;
+  font-weight: 700;
+  margin: 16px auto 0 auto;
+  padding: 12px 26px;
+  cursor: pointer;
+  transition: box-shadow 0.13s;
+  box-shadow: 0 1px 4px #00000033;
 }
-.footer-brand {
-  font-size: 0.9rem;
-  margin-top: 10px;
-  color: #aaa;
-  letter-spacing: 2px;
+.leaderboard-btn:hover {
+  box-shadow: 0 2px 16px #ffe06655;
+  color: #18181a;
+}
+.footer-note {
+  text-align: center;
+  font-size: 0.96em;
+  opacity: 0.77;
+  color: #ffe066;
+  padding: 26px 0 13px 0;
+  letter-spacing: 0.04em;
+  margin-top: 38px;
+  margin-bottom: 4px;
+}
+@media (max-width: 500px) {
+  .logo { font-size: 1.6em; }
+  nav { max-width: 99vw; font-size: 1.25em; }
+  main { max-width: 98vw; }
+  .game-grid { max-width: 99vw; }
 }
