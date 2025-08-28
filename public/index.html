@@ -5,20 +5,164 @@
   <title>Pixley Arcade</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    html, body {
+      background: #18181a;
+      color: #ffe066;
+      margin: 0;
+      padding: 0;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      min-height: 100vh;
+      width: 100vw;
+    }
+    .logo {
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-weight: 900;
+      font-size: 2.6em;
+      letter-spacing: 0.32em;
+      color: #ffe066;
+      text-align: center;
+      margin: 30px auto 4px auto;
+      user-select: none;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 42px;
+      margin: 0 auto 24px auto;
+      padding: 0;
+      background: #232326;
+      border-radius: 24px;
+      box-shadow: 0 2px 18px #00000017;
+      max-width: 410px;
+      font-size: 1.65em;
+    }
+    nav a {
+      color: #ffe066;
+      text-decoration: none;
+      opacity: 0.78;
+      transition: opacity 0.14s;
+      padding: 11px 8px 8px 8px;
+    }
+    nav a.active, nav a:hover {
+      opacity: 1;
+      text-shadow: 0 2px 14px #ffe06638;
+    }
+    .main-content {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 2em;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      color: #ffe066;
+      margin-bottom: 26px;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      text-align: left;
+    }
+    .game-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      margin-bottom: 38px;
+      justify-content: flex-start;
+    }
+    .game-card {
+      flex: 1 0 42%;
+      min-width: 160px;
+      max-width: 190px;
+      background: #232326;
+      border-radius: 22px;
+      box-shadow: 0 2px 16px #00000022;
+      padding: 24px 10px 18px 10px;
+      color: #ffe066;
+      font-size: 1.14em;
+      font-weight: 600;
+      margin-bottom: 2px;
+      cursor: pointer;
+      border: 1.5px solid #34343a;
+      text-align: center;
+      transition: transform 0.08s, box-shadow 0.13s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .game-card:hover {
+      transform: scale(1.04);
+      box-shadow: 0 4px 28px #ffe06624;
+      border-color: #ffe066;
+    }
+    .game-icon {
+      font-size: 2.3em;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .coming-soon {
+      opacity: 0.48;
+      font-size: 0.94em;
+      margin-top: 2px;
+      font-weight: 400;
+    }
+    .leaderboard-btn {
+      display: block;
+      background: #ffe066;
+      color: #18181a;
+      border: none;
+      border-radius: 14px;
+      font-size: 1.13em;
+      font-weight: 700;
+      margin: 0 auto 0 auto;
+      padding: 14px 34px;
+      cursor: pointer;
+      transition: box-shadow 0.13s;
+      box-shadow: 0 2px 16px #ffe06635;
+      margin-bottom: 26px;
+      margin-top: 12px;
+    }
+    .leaderboard-btn:hover {
+      box-shadow: 0 4px 24px #ffe06654;
+      color: #18181a;
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 1.03em;
+      opacity: 0.8;
+      color: #ffe066;
+      padding: 28px 0 16px 0;
+      letter-spacing: 0.04em;
+      margin-top: 32px;
+      margin-bottom: 6px;
+    }
+    @media (max-width: 700px) {
+      .logo { font-size: 2em; }
+      nav { font-size: 1.15em; max-width: 95vw;}
+      .main-content { max-width: 98vw;}
+      .game-list { gap: 13px;}
+      .game-card { min-width: 45vw; }
+    }
+    @media (max-width: 500px) {
+      .main-content { padding: 0 3vw; }
+      .game-list { gap: 10px; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="logo">PIXLEY</div>
-    <nav>
-      <a href="index.html" class="active" title="Home">🏠</a>
-      <a href="leaderboard/index.html" title="Leaderboard">🏆</a>
-      <a href="auth/login.html" title="Sign In">🔑</a>
-      <a href="mailto:support@pixleyarcade.com" title="Support">📩</a>
-    </nav>
-  </header>
-  <main>
+  <div class="logo">PIXLEY</div>
+  <nav>
+    <a href="index.html" class="active" title="Home">🏠</a>
+    <a href="leaderboard/index.html" title="Leaderboard">🏆</a>
+    <a href="auth/login.html" title="Sign In">🔑</a>
+    <a href="mailto:support@pixleyarcade.com" title="Support">📩</a>
+  </nav>
+  <div class="main-content">
     <h2>Featured Games</h2>
-    <div class="game-grid">
+    <div class="game-list">
       <a class="game-card" href="games/block-drop/index.html">
         <span class="game-icon">🟨</span>
         Block Drop
@@ -39,4 +183,8 @@
     <button class="leaderboard-btn" onclick="window.location.href='leaderboard/index.html'">View Leaderboard</button>
     <div class="footer-note">
       New games and features always in development. No account needed to play.<br>
-      Sign in to s
+      Sign in to submit scores &amp; see how you rank!
+    </div>
+  </div>
+</body>
+</html>
